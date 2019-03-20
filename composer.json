@@ -12,9 +12,6 @@
     "require": {
         "bolt/bolt": "^3.0"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^4.7"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -22,17 +19,9 @@
             "email": "tomtompato@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Bolt\\Extension\\Tompato\\TwitterFeed\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Bolt\\Extension\\Tompato\\TwitterFeed\\Tests\\": "tests",
-            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
