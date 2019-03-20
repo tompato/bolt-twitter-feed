@@ -1,0 +1,43 @@
+{
+    "name": "tompato/twitterfeed",
+    "description": "Twitter API twig functions for Bolt",
+    "type": "bolt-extension",
+    "keywords": [
+        "Twitter",
+        "social",
+        "API",
+        "feeds",
+        "Twig"
+    ],
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Bennett",
+            "email": "tomtompato@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\Tompato\\TwitterFeed\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bolt\\Extension\\Tompato\\TwitterFeed\\Tests\\": "tests",
+            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
+        }
+    },
+    "extra": {
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\Tompato\\TwitterFeed\\TwitterFeedExtension",
+        "bolt-icon": "icon.png"
+    }
+}
