@@ -75,6 +75,9 @@ class TwitterFeedExtension extends SimpleExtension
 
         $app = $this->getContainer();
 
+        // Get values from config
+        $config = $this->getConfig();
+
         // Set our request method
         $requestMethod = 'GET';
 
@@ -115,6 +118,9 @@ class TwitterFeedExtension extends SimpleExtension
     public function twitterFollowersList(array $args = array()) {
 
         $app = $this->getContainer();
+
+        // Get values from config
+        $config = $this->getConfig();
 
         // Set our request method
         $requestMethod = 'GET';
