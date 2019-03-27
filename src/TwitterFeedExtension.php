@@ -56,7 +56,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 60);
+          $app['cache']->save($key, $result, 3600);
         }
 
         return $result;
@@ -96,7 +96,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 60);
+          $app['cache']->save($key, $result, 3600);
         }
 
         return $result;
@@ -136,7 +136,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 60);
+          $app['cache']->save($key, $result, 3600);
         }
 
         return $result;
