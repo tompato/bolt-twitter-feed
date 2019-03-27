@@ -45,8 +45,7 @@ class TwitterFeedExtension extends SimpleExtension
 
         $key = 'usertimeline-'.md5($fullUrl);
         if ($app['cache']->contains($key)) {
-          echo 'From cache';
-          die;
+          // If this request has been cached, retrieve it
           $result = $app['cache']->fetch($key);
         } else {
           // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
@@ -84,15 +83,21 @@ class TwitterFeedExtension extends SimpleExtension
         // Create header string to set in our request
         $header = array($this->buildHeaderString($oauth));
 
-        // Send our request to the Twitter API with appropriate Authorization header as per docs
-        try {
-            $result = $app['guzzle.client']->get($fullUrl, ['headers' => ['Authorization' => $header]])->getBody(true);
-        } catch(\Exception $e) {
-            return ['error' =>  $e->getMessage()];
+        $key = 'friendslist-'.md5($fullUrl);
+        if ($app['cache']->contains($key)) {
+          // If this request has been cached, retrieve it
+          $result = $app['cache']->fetch($key);
+        } else {
+          // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
+          try {
+              $result = $app['guzzle.client']->get($fullUrl, ['headers' => ['Authorization' => $header]])->getBody(true);
+          } catch(\Exception $e) {
+              return ['error' =>  $e->getMessage()];
+          }
+          // Decode the JSON that is returned
+          $result = json_decode($result, true);
+          $app['cache']->save($key, $result, 60);
         }
-
-        // Decode the JSON that is returned
-        $result = json_decode($result, true);
 
         return $result;
     }
@@ -118,15 +123,21 @@ class TwitterFeedExtension extends SimpleExtension
         // Create header string to set in our request
         $header = array($this->buildHeaderString($oauth));
 
-        // Send our request to the Twitter API with appropriate Authorization header as per docs
-        try {
-            $result = $app['guzzle.client']->get($fullUrl, ['headers' => ['Authorization' => $header]])->getBody(true);
-        } catch(\Exception $e) {
-            return ['error' =>  $e->getMessage()];
+        $key = 'followerslist-'.md5($fullUrl);
+        if ($app['cache']->contains($key)) {
+          // If this request has been cached, retrieve it
+          $result = $app['cache']->fetch($key);
+        } else {
+          // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
+          try {
+              $result = $app['guzzle.client']->get($fullUrl, ['headers' => ['Authorization' => $header]])->getBody(true);
+          } catch(\Exception $e) {
+              return ['error' =>  $e->getMessage()];
+          }
+          // Decode the JSON that is returned
+          $result = json_decode($result, true);
+          $app['cache']->save($key, $result, 60);
         }
-
-        // Decode the JSON that is returned
-        $result = json_decode($result, true);
 
         return $result;
     }
