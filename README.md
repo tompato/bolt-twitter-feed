@@ -16,6 +16,8 @@ Once you have a Twitter developer account setup and have created your applicatio
 
 Place these in the extensions config file in the matching fields.
 
+The extension implements caching and takes a value in seconds to cache for, if set to 0 this will disable all caching. This is stored in the ```cache_time:``` value in the config and is set to 3600 seconds (1 hour).
+
 You can then call the following functions in your Twig templates.
 
 ### twitter_user_timeline(args) ###
@@ -80,5 +82,4 @@ If you want to see all of the available data, just run a `{{ dump(tweets) }}` in
 
 ### Todos ###
 
-* Add caching of API calls
 * Add more API functions

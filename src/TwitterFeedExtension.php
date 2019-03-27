@@ -28,7 +28,11 @@ class TwitterFeedExtension extends SimpleExtension
      * @return array
      */
     public function twitterUserTimeline(array $args = array()) {
+
         $app = $this->getContainer();
+
+        // Get values from config
+        $config = $this->getConfig();
 
         // Set our request method
         $requestMethod = 'GET';
@@ -44,8 +48,8 @@ class TwitterFeedExtension extends SimpleExtension
         $header = array($this->buildHeaderString($oauth));
 
         $key = 'usertimeline-'.md5($fullUrl);
-        if ($app['cache']->contains($key)) {
-          // If this request has been cached, retrieve it
+        if ($app['cache']->contains($key) && $config['cache_time'] > 0) {
+          // If this request has been cached and setting is not disabling cache, then retrieve it
           $result = $app['cache']->fetch($key);
         } else {
           // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
@@ -56,7 +60,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 3600);
+          $app['cache']->save($key, $result, $config['cache_time']);
         }
 
         return $result;
@@ -68,6 +72,7 @@ class TwitterFeedExtension extends SimpleExtension
      * @return array
      */
     public function twitterFriendsList(array $args = array()) {
+
         $app = $this->getContainer();
 
         // Set our request method
@@ -84,8 +89,8 @@ class TwitterFeedExtension extends SimpleExtension
         $header = array($this->buildHeaderString($oauth));
 
         $key = 'friendslist-'.md5($fullUrl);
-        if ($app['cache']->contains($key)) {
-          // If this request has been cached, retrieve it
+        if ($app['cache']->contains($key) && $config['cache_time'] > 0) {
+          // If this request has been cached and setting is not disabling cache, then retrieve it
           $result = $app['cache']->fetch($key);
         } else {
           // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
@@ -96,7 +101,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 3600);
+          $app['cache']->save($key, $result, $config['cache_time']);
         }
 
         return $result;
@@ -108,6 +113,7 @@ class TwitterFeedExtension extends SimpleExtension
      * @return array
      */
     public function twitterFollowersList(array $args = array()) {
+
         $app = $this->getContainer();
 
         // Set our request method
@@ -124,8 +130,8 @@ class TwitterFeedExtension extends SimpleExtension
         $header = array($this->buildHeaderString($oauth));
 
         $key = 'followerslist-'.md5($fullUrl);
-        if ($app['cache']->contains($key)) {
-          // If this request has been cached, retrieve it
+        if ($app['cache']->contains($key) && $config['cache_time'] > 0) {
+          // If this request has been cached and setting is not disabling cache, then retrieve it
           $result = $app['cache']->fetch($key);
         } else {
           // If not in cache then send our request to the Twitter API with appropriate Authorization header as per docs
@@ -136,7 +142,7 @@ class TwitterFeedExtension extends SimpleExtension
           }
           // Decode the JSON that is returned
           $result = json_decode($result, true);
-          $app['cache']->save($key, $result, 3600);
+          $app['cache']->save($key, $result, $config['cache_time']);
         }
 
         return $result;
